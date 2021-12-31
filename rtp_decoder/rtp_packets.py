@@ -210,28 +210,6 @@ def decode_rtp_packet(packet_bytes):
     return packet_vars
 
 
-def test_rtp_code_decode():
-    """ Run some tests
-        Genenrate an RTP packet from data then decode it and cofirm
-        we get the same data back
-    """
-    packet_bytes = ('8008d4340000303c0b12671ad5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d'
-                    '5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5'
-                    'd5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d'
-                    '5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5'
-                    'd5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d'
-                    '5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5'
-                    'd5d5d5d5d5d5d5')
-    d_pkt = decode_rtp_packet(packet_bytes)
-    # print(d_pkt)
-
-    # Test building a packet
-    # print()
-    pkt = generate_rtp_packet(d_pkt)
-    # print(pkt)
-    assert pkt == packet_bytes
-
-
 def get_rtc_data(filename):
     """ Main program """
     rtp_data = extract_rtp_from_pcap(filename)
@@ -272,7 +250,7 @@ def main():
     """
     for file in FILES:
         filename = FILE_PATH + file['file']
-        data_rate, data = get_rtc_data(filename)
+        data_rate, _ = get_rtc_data(filename)
         print(f"Data rate for {file['rate']}: {data_rate}bps")
 
 
