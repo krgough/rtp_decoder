@@ -29,7 +29,6 @@ FILES = [
 
 FILE_PATH = "/Users/keithgough/Vodafone/saved_neo_logs/codec_logs/"
 
-
 def extract_rtp_from_pcap(filename):
     # pylint: disable=invalid-name
     """ Decode RTP frames from a pcap file
