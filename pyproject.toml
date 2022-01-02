@@ -12,6 +12,7 @@ dpkt = "^1.9.7"
 pytest = "^6.2.5"
 flake8 = "^4.0.1"
 pylint = "^2.12.2"
+black = "^21.12b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -19,3 +20,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 run = "rtp_decoder.rtp_packets:main"
+
+[tool.pylint.messages_control]
+disable = "C0330, C0326"
+max-line-length = "88"

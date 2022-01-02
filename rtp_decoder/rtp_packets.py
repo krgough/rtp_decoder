@@ -29,9 +29,10 @@ FILES = [
 
 FILE_PATH = "/Users/keithgough/Vodafone/saved_neo_logs/codec_logs/"
 
+
 def extract_rtp_from_pcap(filename):
     # pylint: disable=invalid-name
-    """ Decode RTP frames from a pcap file
+    """Decode RTP frames from a pcap file
     RTP is used by webrtc for audio data
     """
     rtp_frames = []
@@ -75,8 +76,7 @@ def extract_rtp_from_pcap(filename):
             # Our src device will always have a 10.xx.xx.xx IP addr
             # The wanted rtp frames start with 0x90
             if src.startswith("10") and udp.data.hex().startswith("90"):
-                rtp_frames.append({"timestamp": t_stamp,
-                                   "udp_data": udp.data.hex()})
+                rtp_frames.append({"timestamp": t_stamp, "udp_data": udp.data.hex()})
 
             LOGGER.debug("%s, %s, %s, %s", t_stamp, src, dst, ip)
 
@@ -84,15 +84,14 @@ def extract_rtp_from_pcap(filename):
 
 
 def load_data(filename):
-    """ Load data from a csv file
-    """
+    """Load data from a csv file"""
     with open(filename, mode="r", encoding="utf-8") as file:
         data = [dict(row.items()) for row in csv.DictReader(file)]
     return data
 
 
 def generate_rtp_packet(packet_vars):
-    """ Generate an RTP packet with the given data
+    """Generate an RTP packet with the given data
 
     Example Usage:
 
@@ -143,12 +142,11 @@ def generate_rtp_packet(packet_vars):
     # SSRC 32 bits - Typ. randomly generated for each stream for uniqueness
     ssrc = f"{packet_vars['ssrc']:08x}"
 
-    return "".join([byte1, byte2, seq_num, t_stamp,
-                    ssrc, packet_vars["payload"]])
+    return "".join([byte1, byte2, seq_num, t_stamp, ssrc, packet_vars["payload"]])
 
 
 def decode_rtp_packet(packet_bytes):
-    """ Decode an RTP packet
+    """Decode an RTP packet
 
     Example Usage:
 
@@ -212,8 +210,7 @@ def decode_rtp_packet(packet_bytes):
 
 
 def get_rtc_data(filename):
-    """ Extract RTC data from packets in the file
-    """
+    """Extract RTC data from packets in the file"""
     rtp_data = extract_rtp_from_pcap(filename)
     raw_data = []
     seq_nums = []
@@ -245,8 +242,7 @@ def get_rtc_data(filename):
 
 
 def main():
-    """ Extract the RTC data from the given pcap files
-    """
+    """Extract the RTC data from the given pcap files"""
     for file in FILES:
         filename = FILE_PATH + file["file"]
         data_rate, _ = get_rtc_data(filename)
