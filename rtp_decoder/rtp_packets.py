@@ -12,8 +12,9 @@ RTC Specification:
 https://datatracker.ietf.org/doc/html/rfc3550
 
 """
-import csv
+
 import logging
+import csv
 
 import dpkt
 
